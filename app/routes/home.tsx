@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import { Header } from "~/components/Header";
 
 // --- Data for News Section ---
 // Using React Router's loader function is considered for future data fetching.
@@ -28,7 +29,9 @@ function Hero() {
   return (
     <section className="h-screen bg-gray-800 text-white flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-4xl md:text-6xl font-serif">旬の恵みを、一皿に込めて</h1>
+        <h1 className="text-4xl md:text-6xl font-serif">
+          旬の恵みを、一皿に込めて
+        </h1>
         <p className="mt-4 text-lg">レストラン パッション</p>
       </div>
     </section>
@@ -45,7 +48,10 @@ function Concept() {
           <br />
           素材が持つ本来の味わいを最大限に引き出し、最高の状態で「熱々」のままお客様の元へお届けします。
         </p>
-        <Link to="/concept" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition">
+        <Link
+          to="/concept"
+          className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+        >
           コンセプトページへ
         </Link>
       </div>
@@ -62,7 +68,9 @@ function News() {
           {newsData.map((item, index) => (
             <div key={index} className="bg-white p-6 shadow-md">
               <p className="text-sm text-gray-500">{item.date}</p>
-              <span className={`inline-block bg-red-800 text-white text-xs px-2 py-1 my-2`}>
+              <span
+                className={`inline-block bg-red-800 text-white text-xs px-2 py-1 my-2`}
+              >
                 {item.category}
               </span>
               <h3 className="font-bold">{item.title}</h3>
@@ -70,7 +78,10 @@ function News() {
           ))}
         </div>
         <div className="text-center mt-12">
-          <Link to="/news" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition">
+          <Link
+            to="/news"
+            className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+          >
             お知らせ一覧へ
           </Link>
         </div>
@@ -85,7 +96,11 @@ function MenuAndChef() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
-            <img src="https://source.unsplash.com/random/800x600/?cassolette" alt="Cassolette dish" className="w-full h-full object-cover shadow-lg"/>
+            <img
+              src="https://source.unsplash.com/random/800x600/?cassolette"
+              alt="Cassolette dish"
+              className="w-full h-full object-cover shadow-lg"
+            />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-serif mb-4">MENU & CHEF</h2>
@@ -93,10 +108,16 @@ function MenuAndChef() {
               シェフの故郷の味であり、生涯を捧げるスペシャリテ「カスレ」。
               厳選された食材と、伝統のレシピが織りなす情熱の煮込み料理をご堪能ください。
             </p>
-            <Link to="/menu" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition mr-4">
+            <Link
+              to="/menu"
+              className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition mr-4"
+            >
               メニュー詳細へ
             </Link>
-            <Link to="/chef" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition">
+            <Link
+              to="/chef"
+              className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+            >
               シェフについて
             </Link>
           </div>
@@ -137,7 +158,9 @@ function Access() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-serif mb-8 text-center">ACCESS & RESERVATION</h2>
+        <h2 className="text-3xl font-serif mb-8 text-center">
+          ACCESS & RESERVATION
+        </h2>
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="md:w-1/2 h-96">
             <iframe
@@ -151,11 +174,22 @@ function Access() {
             ></iframe>
           </div>
           <div className="md:w-1/2 text-center md:text-left">
-            <p className="mb-2"><strong>住所:</strong> 東京都渋谷区猿楽町29-18 ヒルサイドテラス</p>
-            <p className="mb-2"><strong>電話番号:</strong> 03-3476-5025</p>
-            <p className="mb-2"><strong>営業時間:</strong> 12:00-15:00 / 18:00-22:00</p>
-            <p className="mb-4"><strong>定休日:</strong> 月曜日</p>
-            <a href="#" className="inline-block w-full text-center bg-red-800 text-white px-8 py-4 text-lg font-bold hover:bg-red-700 transition">
+            <p className="mb-2">
+              <strong>住所:</strong> 東京都渋谷区猿楽町29-18 ヒルサイドテラス
+            </p>
+            <p className="mb-2">
+              <strong>電話番号:</strong> 03-3476-5025
+            </p>
+            <p className="mb-2">
+              <strong>営業時間:</strong> 12:00-15:00 / 18:00-22:00
+            </p>
+            <p className="mb-4">
+              <strong>定休日:</strong> 月曜日
+            </p>
+            <a
+              href="#"
+              className="inline-block w-full text-center bg-red-800 text-white px-8 py-4 text-lg font-bold hover:bg-red-700 transition"
+            >
               オンライン予約
             </a>
           </div>
@@ -167,13 +201,14 @@ function Access() {
 
 function FloatingCTA() {
   return (
-    <Link to="/reservation" className="fixed bottom-8 right-8 bg-red-800 text-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition z-50">
+    <Link
+      to="/reservation"
+      className="fixed bottom-8 right-8 bg-red-800 text-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition z-50"
+    >
       <span className="text-center text-sm font-bold">予約</span>
     </Link>
   );
 }
-
-
 
 // The loader can be used in the future to fetch dynamic data, for example, for the News section.
 export function loader({ context }: Route.LoaderArgs) {
@@ -184,6 +219,7 @@ export function loader({ context }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div className="antialiased text-gray-800">
+      <Header />
       <Hero />
       <Concept />
       <News />
@@ -197,7 +233,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Restaurant Pachon | レストラン パッション" },
-    { name: "description", content: "代官山のフレンチレストラン「パッション」。暖炉の火のように温かなフランス料理で、心満たされるひとときを。" },
+    {
+      name: "description",
+      content:
+        "代官山のフレンチレストラン「パッション」。暖炉の火のように温かなフランス料理で、心満たされるひとときを。",
+    },
   ];
 }
-
