@@ -15,7 +15,7 @@ export function Hero() {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000); // 5秒ごとに切り替え
+        }, 7000); // 5秒ごとに切り替え
 
         return () => clearInterval(interval); // コンポーネントが不要になったらタイマーを解除
     }, []);
@@ -25,7 +25,7 @@ export function Hero() {
             {/* 背景画像コンテナ */}
             <div className="absolute inset-0 w-screen h-full">
                 {images.map((image, index) => (
-                    <div key={index} className={` absolute inset-0 w-full h-full transition-opacity ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"} `}>
+                    <div key={index} className={` absolute inset-0 w-full h-full ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"} `}>
                         <div key={currentIndex} className="w-full h-full bg-cover bg-center animate-zoomin" style={{
                             backgroundImage: `url(${image})`
                         }} />
