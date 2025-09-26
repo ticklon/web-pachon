@@ -21,16 +21,16 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen text-white flex items-center justify-center">
+    <section className="relative h-screen text-white flex items-center justify-center overflow-hidden">
       {/* 背景画像コンテナ */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-screen h-full">
         {images.map((image, index) => (
           <div
             key={index}
             className={`
               absolute inset-0 w-full h-full bg-cover bg-center 
               transition-all duration-1000 ease-in-out 
-              ${index === currentIndex ? 'opacity-100 scale-110' : 'opacity-0'}
+              ${index === currentIndex ? 'opacity-100 animate-zoomin' : 'opacity-0'}
             `}
             style={{ backgroundImage: `url(${image})` }}
           />

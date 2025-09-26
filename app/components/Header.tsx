@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import { MobileHeaderMenu } from "~/components/mobile-header-menu"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,11 +20,11 @@ export function Header() {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center h-20">
-        <Link to="/" className={`font-bold text-xl ${scrolled ? "text-gray-800" : "text-white"}`}>
+        <Link to="/" className={`font-bold items-center text-xl ${scrolled ? "text-gray-800" : "text-white"}`}>
           PACHON
         </Link>
         <nav>
-          <ul className="flex space-x-6">
+          <ul className="hidden sm:flex space-x-6">
             {["Menu", "Concept", "Access", "Chef", "History"].map((item) => (
               <li key={item}>
                 <Link
@@ -37,6 +38,9 @@ export function Header() {
               </li>
             ))}
           </ul>
+            <div className="block sm:hidden">
+                <MobileHeaderMenu />
+            </div>
         </nav>
       </div>
     </header>
