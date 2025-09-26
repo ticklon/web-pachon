@@ -1,7 +1,8 @@
 import type { Route } from "./+types/home";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
-import { Header } from "~/components/Header";
+import { Header, } from "~/components/Header";
+import { Hero } from "~/components/Hero";
 
 // --- Data for News Section ---
 // Using React Router's loader function is considered for future data fetching.
@@ -25,18 +26,6 @@ const newsData = [
 
 // --- Components for each section ---
 
-function Hero() {
-  return (
-    <section className="h-screen bg-gray-800 text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl md:text-6xl font-serif">
-          旬の恵みを、一皿に込めて
-        </h1>
-        <p className="mt-4 text-lg">レストラン パッション</p>
-      </div>
-    </section>
-  );
-}
 
 function Concept() {
   return (

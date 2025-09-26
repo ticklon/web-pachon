@@ -1,17 +1,38 @@
 @import "tailwindcss" source(".");
+/* 1. コア機能のインポート */
 
 @theme {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "EB Garamond", serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: "EB Garamond", serif;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+    @apply bg-white dark:bg-gray-950;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+    /* 2. 独自ユーティリティやアニメーションの追加 */
+    @layer utilities {
+
+        /* STEP 1: @keyframes を直接定義する */
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
+
+        /* STEP 2: keyframesを適用するユーティリティクラスを作成する */
+        .animate-zoom-in {
+            /* animation: {アニメーション名} {再生時間} {イージング} {再生後の状態}; */
+            animation: zoomIn 8s ease-in-out forwards;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
 }
