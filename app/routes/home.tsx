@@ -148,7 +148,7 @@ function Access() {
                             <strong>営業時間:</strong> 12:00-15:00 / 18:00-22:00
                         </p>
                         <p className="mb-4">
-                            <strong>定休日:</strong> 月曜日
+                            <strong>定休日:</strong> 火曜日
                         </p>
                         <a href="#"
                             className="inline-block w-full text-center bg-red-800 text-white px-8 py-4 text-lg font-bold hover:bg-red-700 transition">
@@ -192,7 +192,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 }
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Restaurant Pachon | レストラン パッション" },
+        { title: "Restaurant PACHON 代官山の老舗フランス料理 【レストラン パッション】 |  17世紀の暖炉と世界一のカスレをフレンチレストランで堪能" },
         {
             name: "description",
             content:
