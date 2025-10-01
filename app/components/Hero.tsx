@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 
 // ① 表示したい画像のリストを準備します
 const images = [
-    "https://images.unsplash.com/photo-1504674900247-0877df9cc836", // 画像のパスやURLに置き換えてください
-    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
-    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1",
+    "cassoulet.jpg", // 画像のパスやURLに置き換えてください
+    "/DSC_0005.jpg", // 画像のパスやURLに置き換えてください
+    "/DSC_0013.jpg",
+    "/DSC_0364.jpg",
+    "/DSC_0041.jpg",
+    "/DSC_0343.jpg",
+    "/DSC_0350.jpg",
+    "/DSC_0039.jpg",
+    "/DSC_0358.jpg",
 ];
 
 export function Hero() {
@@ -32,15 +38,15 @@ export function Hero() {
                     </div>
                 ))}
                 {/* 文字を読みやすくするための黒いオーバーレイ */}
-                <div className="absolute inset-0 bg-black opacity-30"></div>
+                <div className="absolute inset-0 bg-black/25"></div>
             </div>
 
             {/* テキストコンテンツ */}
             <div className="relative z-10 text-center">
-                <h1 className="text-4xl md:text-6xl font-serif">
-                    旬の恵みを、一皿に込めて
+                <h1 className="text-2xl md:text-6xl font-serif font-semibold sm:font-medium text-shadow-stone-900/50 text-shadow-lg">
+                    伝統と郷土を、一皿に込めて
                 </h1>
-                <p className="mt-4 text-lg">レストラン パッション</p>
+                <p className="mt-4 text-xl sm:text-2xl font-serif">PACHON</p>
             </div>
         </section>
     );
