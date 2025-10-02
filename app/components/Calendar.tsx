@@ -19,13 +19,10 @@ const Calendar: React.FC<CalendarProps> = ({ year, month, specialDays = [] }) =>
 
   const specialDaysMap = new Map(specialDays.map(d => [d.date, d]));
 
-  // 定休日の基本ルール
   const isRegularClosedDay = (date: Date): boolean => {
     const dayOfWeek = date.getDay();
     const dayOfMonth = date.getDate();
-    // 毎週月曜日
     if (dayOfWeek === 1) return true;
-    // 第1・第3火曜日
     if (dayOfWeek === 2 && (dayOfMonth >= 1 && dayOfMonth <= 7 || dayOfMonth >= 15 && dayOfMonth <= 21)) {
       return true;
     }
@@ -37,14 +34,13 @@ const Calendar: React.FC<CalendarProps> = ({ year, month, specialDays = [] }) =>
     return specialDaysMap.get(dateString);
   };
 
-  const renderCalendar = () => {
+  const renderDays = () => {
     const firstDayOfMonth = new Date(year, monthIndex, 1).getDay();
     const lastDateOfMonth = new Date(year, monthIndex + 1, 0).getDate();
-
     const days = [];
 
     for (let i = 0; i < firstDayOfMonth; i++) {
-      days.push(<div key={`empty-${i}`} className="day empty"></div>);
+      days.push(<div key={`empty-${i}`} className="h-10"></div>);
     }
 
     for (let i = 1; i <= lastDateOfMonth; i++) {
@@ -52,34 +48,34 @@ const Calendar: React.FC<CalendarProps> = ({ year, month, specialDays = [] }) =>
       const dayOfWeek = date.getDay();
       const specialDay = getSpecialDay(date);
 
-      const classNames = ['day'];
       let isClosed = isRegularClosedDay(date);
+      let isDinnerOnly = false;
+      let isEvent = false;
 
       if (specialDay) {
-        if (specialDay.type === 'closed') {
-          isClosed = true;
-        } else if (specialDay.type === 'dinner-only') {
-          isClosed = false; // ディナーのみ営業日は休業日ではない
-          classNames.push('dinner-only');
-        } else if (specialDay.type === 'event') {
-          classNames.push('event');
+        if (specialDay.type === 'closed') isClosed = true;
+        if (specialDay.type === 'dinner-only') {
+          isClosed = false;
+          isDinnerOnly = true;
         }
+        if (specialDay.type === 'event') isEvent = true;
       }
 
-      if (year === today.getFullYear() && monthIndex === today.getMonth() && i === today.getDate()) {
-        classNames.push('today');
-      }
-      if (dayOfWeek === 0) classNames.push('sunday');
-      if (dayOfWeek === 6) classNames.push('saturday');
-      
-      if (isClosed) {
-        classNames.push('closed');
-      }
+      const isToday = year === today.getFullYear() && monthIndex === today.getMonth() && i === today.getDate();
+
+      const dayClasses = [
+        'flex', 'flex-col', 'justify-center', 'items-center', 'h-10', 'text-base', 'rounded-full', 'transition-colors', 'duration-300', 'relative',
+        isClosed ? 'cursor-not-allowed line-through text-[#c0a062] bg-gray-50' : 'cursor-pointer hover:bg-gray-100',
+        isDinnerOnly ? 'bg-[#fcf8f0]' : '',
+        isToday ? 'bg-[#c0a062] text-white font-normal' : '',
+        dayOfWeek === 0 && !isToday ? 'text-red-500' : '',
+        dayOfWeek === 6 && !isToday ? 'text-blue-500' : '',
+      ].filter(Boolean).join(' ');
 
       days.push(
-        <div key={i} className={classNames.join(' ')} title={specialDay?.description}>
+        <div key={i} className={dayClasses} title={specialDay?.description}>
           {i}
-          {specialDay?.type === 'event' && <div className="event-dot"></div>}
+          {isEvent && <div className="absolute bottom-1 w-1.5 h-1.5 bg-[#c0a062] rounded-full"></div>}
         </div>
       );
     }
@@ -87,30 +83,26 @@ const Calendar: React.FC<CalendarProps> = ({ year, month, specialDays = [] }) =>
   };
 
   return (
-    <div className="calendar-widget">
-      <div className="calendar-header">
-        <h2>{`${year}年 ${month}月`}</h2>
+    <div className="font-sans w-[400px] bg-white rounded-lg shadow-lg p-6 text-gray-800">
+      <div className="text-center mb-5">
+        <h2 className="text-xl font-normal m-0 text-gray-900">{`${year}年 ${month}月`}</h2>
       </div>
-      <div className="calendar-grid weekdays">
-        <div className="weekday">Sun</div>
-        <div className="weekday">Mon</div>
-        <div className="weekday">Tue</div>
-        <div className="weekday">Wed</div>
-        <div className="weekday">Thu</div>
-        <div className="weekday">Fri</div>
-        <div className="weekday">Sat</div>
+      <div className="grid grid-cols-7 gap-2 pb-2.5">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          <div key={day} className="text-center text-sm font-light text-gray-400">{day}</div>
+        ))}
       </div>
-      <div className="calendar-grid" id="calendar-days">
-        {renderCalendar()}
+      <div className="grid grid-cols-7 gap-2">
+        {renderDays()}
       </div>
-      <div className="legend">
-        <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: '#c0a062' }}></div>
-            定休日
+      <div className="mt-5 pt-4 border-t border-gray-100 text-sm text-gray-500">
+        <div className="flex items-center mb-1">
+          <div className="w-3 h-3 rounded-full mr-2 bg-[#c0a062]"></div>
+          <span>定休日</span>
         </div>
-        <div className="legend-item">
-            <div className="legend-color" style={{ backgroundColor: '#fcf8f0' }}></div>
-            ディナーのみ営業
+        <div className="flex items-center">
+          <div className="w-3 h-3 rounded-full mr-2 bg-[#fcf8f0] border border-gray-200"></div>
+          <span>ディナーのみ営業</span>
         </div>
       </div>
     </div>
