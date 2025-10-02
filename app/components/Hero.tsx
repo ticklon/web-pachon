@@ -31,22 +31,26 @@ export function Hero() {
             {/* 背景画像コンテナ */}
             <div className="absolute inset-0 w-screen h-full">
                 {images.map((image, index) => (
-                    <div key={index} className={` absolute inset-0 w-full h-full ease-in-out duration-1000 ${index === currentIndex ? "opacity-100" : "opacity-0"} `}>
+                    <div key={index} className={` absolute inset-0 w-full h-full ease-in-out duration-1000 ${index === currentIndex
+                        ? "opacity-100" : "opacity-0"} `}>
                         <div key={currentIndex} className="w-full h-full bg-cover bg-center animate-zoomin" style={{
-                            backgroundImage: `url(${image})`
+                            backgroundImage: `url(${image})`,
                         }} />
                     </div>
                 ))}
                 {/* 文字を読みやすくするための黒いオーバーレイ */}
-                <div className="absolute inset-0 bg-black/25"></div>
+                <div className="absolute inset-0 bg-black/10"></div>
             </div>
 
             {/* テキストコンテンツ */}
             <div className="relative z-10 text-center">
-                <h1 className="text-2xl md:text-6xl font-serif font-semibold sm:font-medium text-shadow-stone-900/50 text-shadow-lg">
+                <h1
+                    className="text-2xl md:text-6xl font-serif font-semibold sm:font-medium text-shadow-stone-900/50 text-shadow-lg">
                     伝統と郷土を、一皿に込めて
                 </h1>
-                <p className="mt-4 text-xl sm:text-2xl font-serif">PACHON</p>
+                <p className="mt-4 text-xl sm:text-2xl font-serif text-shadow-stone-900/50 text-shadow-lg">
+                    PACHON
+                </p>
             </div>
         </section>
     );

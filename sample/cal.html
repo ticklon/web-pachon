@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>営業日カレンダー (単月表示)</title>
+    <style>
+        /* --- フォント設定 --- */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
+
+        /* --- 全体のスタイル --- */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* --- カレンダーのコンテナ --- */
+        .calendar-widget {
+            width: 400px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            color: #333;
+        }
+
+        /* --- ヘッダー（年月） --- */
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 0;
+            color: #1a1a1a;
+        }
+        
+        /* --- 曜日 --- */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .weekday {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #999;
+            padding-bottom: 10px;
+        }
+        
+        /* --- 日付 --- */
+        .day {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+        .day.empty {
+            cursor: default;
+        }
+        .day:not(.empty):not(.closed):not(.today):not(.dinner-only):hover {
+            background-color: #f0f0f0;
+        }
+
+        /* --- 日付の状態 --- */
+        .day.sunday { color: #d9534f; }
+        .day.saturday { color: #428bca; }
+        .day.today {
+            background-color: #c0a062;
+            color: #ffffff;
+            font-weight: 400;
+        }
+        .day.closed {
+            color: #c0a062;
+            cursor: not-allowed;
+            text-decoration: line-through;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #e0e0e0;
+        }
+        /* ★ディナーのみ営業日のスタイルを追加 */
+        .day.dinner-only {
+            background-color: #fcf8f0; /* 薄いゴールド */
+        }
+        .day.event .event-dot {
+            position: absolute;
+            bottom: 5px;
+            width: 5px;
+            height: 5px;
+            background-color: #c0a062;
+            border-radius: 50%;
+        }
+
+        /* --- 凡例 --- */
+        .legend {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 1px solid #eee; /* 背景が薄い色のため枠線を追加 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calendar-widget">
+        <div class="calendar-header">
+            <h2 id="current-month"></h2>
+        </div>
+        <div class="calendar-grid weekdays">
+            <div class="weekday">Sun</div>
+            <div class="weekday">Mon</div>
+            <div class="weekday">Tue</div>
+            <div class="weekday">Wed</div>
+            <div class="weekday">Thu</div>
+            <div class="weekday">Fri</div>
+            <div class="weekday">Sat</div>
+        </div>
+        <div class="calendar-grid" id="calendar-days">
+            </div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #c0a062;"></div>
+                定休日
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fcf8f0;"></div>
+                ディナーのみ営業
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentMonthEl = document.getElementById('current-month');
+            const calendarDaysEl = document.getElementById('calendar-days');
+
+            // --- ▼設定項目 ---
+
+            // ★表示したい年月を設定 (月は0から始まるので、12月は「11」)
+            const displayYear = 2025;
+            const displayMonth = 11; // 0:1月, 1:2月 ... 11:12月
+            
+            let currentDate = new Date(displayYear, displayMonth);
+
+            // ★イベントの種類を 'type' で管理できるように変更
+            const specialEvents = {
+                '2025-12-24': { type: 'dinner-only', text: 'クリスマスディナー営業' },
+                '2025-12-31': { type: 'event', text: '年越し特別営業' }
+            };
+
+            // 定休日の設定
+            function isClosed(date) {
+                const dayOfWeek = date.getDay();
+                const dayOfMonth = date.getDate();
+
+                // 毎週月曜日
+                if (dayOfWeek === 1) return true;
+                
+                // 第1・第3火曜日
+                if (dayOfWeek === 2 && (dayOfMonth >= 1 && dayOfMonth <= 7 || dayOfMonth >= 15 && dayOfMonth <= 21)) {
+                    return true;
+                }
+                
+                return false;
+            }
+
+            // --- ▲設定項目おわり ---
+            
+            function renderCalendar() {
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+
+                currentMonthEl.textContent = `${year}年 ${month + 1}月`;
+                calendarDaysEl.innerHTML = '';
+
+                const firstDayOfMonth = new Date(year, month, 1).getDay();
+                const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+                
+                for (let i = 0; i < firstDayOfMonth; i++) {
+                    const emptyCell = document.createElement('div');
+                    emptyCell.classList.add('day', 'empty');
+                    calendarDaysEl.appendChild(emptyCell);
+                }
+                
+                for (let i = 1; i <= lastDateOfMonth; i++) {
+                    const dayCell = document.createElement('div');
+                    dayCell.classList.add('day');
+                    
+                    const date = new Date(year, month, i);
+                    const dayOfWeek = date.getDay();
+                    
+                    dayCell.textContent = i;
+
+                    const today = new Date();
+                    if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+                        dayCell.classList.add('today');
+                    }
+
+                    if (dayOfWeek === 0) dayCell.classList.add('sunday');
+                    if (dayOfWeek === 6) dayCell.classList.add('saturday');
+                    
+                    if (isClosed(date)) {
+                        dayCell.classList.add('closed');
+                    }
+
+                    // ★特別イベントの処理を修正
+                    const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    const eventData = specialEvents[dateString];
+                    if (eventData) {
+                        // typeに応じてクラスを追加
+                        if (eventData.type === 'dinner-only') {
+                            dayCell.classList.add('dinner-only');
+                        } else if (eventData.type === 'event') {
+                            dayCell.classList.add('event');
+                            const eventDot = document.createElement('div');
+                            eventDot.classList.add('event-dot');
+                            dayCell.appendChild(eventDot);
+                        }
+                        dayCell.title = eventData.text; // マウスオーバーで詳細表示
+                    }
+
+                    calendarDaysEl.appendChild(dayCell);
+                }
+            }
+
+            renderCalendar();
+        });
+    </script>
+
+</body>
+</html>
