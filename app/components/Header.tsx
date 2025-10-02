@@ -27,7 +27,7 @@ export function Header() {
                 </Link>
                 <nav>
                     <ul className="hidden sm:flex space-x-6">
-                        {["Menu", "Concept", "Access", "Chef", "History"].map((item) => (
+                        {["Menu", "Concept", "Access", "Chef", "History", "Calendar"].map((item) => (
                             <li key={item}>
                                 <Link to={`/${item.toLowerCase()}`} className={`hover:bg-white/50 hover:text-red-800 hover:text-shadow-none text-shadow-lg text-shadow-stone-900 px-2 py-1 rounded-full transition-all duration-300 ${scrolled
                                     ? "text-gray-600 text-shadow-none" : "text-white"}`}>
