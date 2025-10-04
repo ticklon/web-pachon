@@ -8,7 +8,8 @@ export default function CalendarPage() {
   // Example of passing an array
   const specialDays = [
     { date: `${year}-${String(month).padStart(2, '0')}-10`, type: 'dinner-only' as const, description: 'Dinner only' },
-    { date: `${year}-${String(month).padStart(2, '0')}-20`, type: 'closed' as const, description: 'Temporary closure' },
+    { date: `${year}-${String(month).padStart(2, '0')}-08`, type: 'closed' as const, description: 'Temporary closure' },
+    { date: `${year}-${String(month).padStart(2, '0')}-28`, type: 'open' as const, description: 'Temporary closure' },
     { date: `${year}-${String(month).padStart(2, '0')}-25`, type: 'event' as const, description: 'Special event' },
   ];
 
