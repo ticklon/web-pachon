@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 //
 // ① 表示したい画像のリストを準備します
 const images = [
@@ -16,29 +16,13 @@ const images = [
   "/_MG_4824.jpg",
 ];
 
-const SLIDE_INTERVAL = 5000;
-
-const variants = {
-  // 登場時の状態
-  enter: {
-    opacity: 1,
-    scale: 1.15,
-  },
-  // 初期状態（画面外や透明な状態）
-  hidden: {
-    opacity: 0,
-    scale: 1,
-  },
-  // 退場時の状態
-  exit: {
-    opacity: 0,
-    scale: 1, // 退場時はズームを戻す
-  },
-};
+const SLIDE_INTERVAL = 7000;
+const ANIMATION_DELAY = 1100;
 
 export function Hero() {
   // ② 現在表示している画像のインデックスを管理
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [innerCurrentIndex, setInnerCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,16 +32,32 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const animationTimer = setTimeout(() => {
+      setInnerCurrentIndex(currentIndex);
+    }, ANIMATION_DELAY);
+
+    return () => clearTimeout(animationTimer); // クリーンアップ
+  }, [currentIndex]);
+
+
   return (
     <section className="relative h-screen text-white flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
         {images.map((image, index) => (
           <div key={index} className={` absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out
       ${index === currentIndex ? "opacity-100" : "opacity-0"} `}>
-            <div key={`${index}-${currentIndex}`} className="w-full h-full bg-cover bg-center animate-zoom" style={{ backgroundImage: `url(${image})` }} />
+            <div
+              className={`
+                w-full h-full bg-cover bg-center
+                ${index === innerCurrentIndex ? 'animate-zoom' : ''}
+              `}
+              style={{ backgroundImage: `url(${image})` }}
+            />
+
           </div>
         ))}
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-10"></div>
       </div>
 
       <div className="relative z-10 text-center">
