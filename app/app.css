@@ -7,11 +7,16 @@
   --font-serif: "EB Garamond", serif;
 
   @keyframes zoomIn {
-    from { transform: scale(1.0); }
-    to { transform: scale(1.15); }
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.15);
+    }
   }
 
-  --animate-zoom: zoomIn 8s ease-in-out forwards;
+  --animate-zoom: zoomIn 5s ease-in-out infinite;
 }
 
 html,

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { motion, AnimatePresence } from 'framer-motion';
+//
 // ① 表示したい画像のリストを準備します
 const images = [
   "cassoulet.jpg", // 画像のパスやURLに置き換えてください
@@ -16,51 +18,48 @@ const images = [
 
 const SLIDE_INTERVAL = 5000;
 
+const variants = {
+  // 登場時の状態
+  enter: {
+    opacity: 1,
+    scale: 1.15,
+  },
+  // 初期状態（画面外や透明な状態）
+  hidden: {
+    opacity: 0,
+    scale: 1,
+  },
+  // 退場時の状態
+  exit: {
+    opacity: 0,
+    scale: 1, // 退場時はズームを戻す
+  },
+};
+
 export function Hero() {
   // ② 現在表示している画像のインデックスを管理
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [leavingIndex, setLeavingIndex] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLeavingIndex(currentIndex);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, SLIDE_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [currentIndex]); // ★ currentIndexを依存配列に追加
-
-  const animationClass =
-    currentIndex % 2 === 0 ? "animate-zoom-in-1" : "animate-zoom-in-2";
+  }, []);
 
   return (
     <section className="relative h-screen text-white flex items-center justify-center overflow-hidden">
-      {/* 背景画像コンテナ */}
       <div className="absolute inset-0 w-full h-full">
-        {images.map((image, index) => {
-          const isActive = index === currentIndex;
-          const isLeaving = index === leavingIndex;
-
-          let className = "absolute inset-0 w-full h-full bg-cover bg-center";
-
-          if (isActive) {
-            className += " animate-enter"; // 登場アニメーションを適用
-          } else if (isLeaving) {
-            // 退場するスライドは拡大した状態を維持したまま、透明度だけを操作
-            className +=
-              " opacity-0 transition-opacity duration-1000 ease-in-out";
-          } else {
-            className += " opacity-0"; // それ以外は非表示
-          }
-
-          return (
-            <div key={index} className={className} style={{ backgroundImage: `url(${image})` }} />
-          );
-        })}
+        {images.map((image, index) => (
+          <div key={index} className={` absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out
+      ${index === currentIndex ? "opacity-100" : "opacity-0"} `}>
+            <div key={`${index}-${currentIndex}`} className="w-full h-full bg-cover bg-center animate-zoom" style={{ backgroundImage: `url(${image})` }} />
+          </div>
+        ))}
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
 
-      {/* テキストコンテンツ */}
       <div className="relative z-10 text-center">
         <h1
           className="text-2xl md:text-6xl font-serif font-semibold sm:font-medium text-shadow-stone-900/50 text-shadow-lg">
