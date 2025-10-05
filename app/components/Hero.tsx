@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { motion, AnimatePresence } from "framer-motion";
-//
-// ① 表示したい画像のリストを準備します
 const images = [
-  "cassoulet.jpg", // 画像のパスやURLに置き換えてください
-  "/DSC_0005.jpg", // 画像のパスやURLに置き換えてください
+  "cassoulet.jpg", 
+  "/DSC_0005.jpg", 
   "/DSC_0013.jpg",
   "/DSC_0364.jpg",
   "/DSC_0041.jpg",
