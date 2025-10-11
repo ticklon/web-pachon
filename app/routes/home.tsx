@@ -163,10 +163,10 @@ function Access() {
 
 function FloatingCTA() {
     return (
-        <Link to="/reservation"
+        <div
             className="fixed bottom-8 right-8 bg-red-800 text-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-red-700 transition z-50">
             <span className="text-center text-sm font-bold">予約</span>
-        </Link>
+        </div>
     );
 }
 

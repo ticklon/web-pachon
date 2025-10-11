@@ -78,7 +78,7 @@ const Calendar: React.FC<CalendarProps> = ({
         isClosed
           ? "cursor-not-allowed line-through text-gray-50 bg-gray-500"
           : "cursor-pointer hover:bg-gray-100",
-        isDinnerOnly ? "bg-[#fcf8f0]" : "",
+        isDinnerOnly ? "border-blue-800 border bg-amber-300" : "",
       ]
         .filter(Boolean)
         .join(" ");
@@ -115,11 +115,11 @@ const Calendar: React.FC<CalendarProps> = ({
       <div className="grid grid-cols-7 gap-2">{renderDays()}</div>
       <div className="mt-5 pt-4 border-t border-gray-100 text-sm text-gray-500">
         <div className="flex items-center mb-1">
-          <div className="w-3 h-3 rounded-full mr-2 bg-[#c0a062]"></div>
+          <div className="w-4 h-4 rounded-full mr-2 bg-gray-500"></div>
           <span>定休日</span>
         </div>
         <div className="flex items-center">
-          <div className="w-3 h-3 rounded-full mr-2 bg-[#fcf8f0] border border-gray-200"></div>
+          <div className="w-4 h-4 rounded-full mr-2 border-blue-800 border bg-amber-300"></div>
           <span>ディナーのみ営業</span>
         </div>
       </div>
