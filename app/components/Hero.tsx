@@ -54,7 +54,6 @@ export function Hero() {
 
           </div>
         ))}
-        <div className="absolute inset-0 bg-black opacity-10"></div>
       </div>
 
       <div className="relative z-10 text-center">
