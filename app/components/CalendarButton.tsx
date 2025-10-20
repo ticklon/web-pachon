@@ -5,6 +5,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
+import Calendar from "~/components/Calendar";
 
 interface CalendarDialogProps {
   scrolled: boolean;
@@ -12,6 +13,29 @@ interface CalendarDialogProps {
 
 export function CalendarButton({ scrolled }: CalendarDialogProps) {
   let [isOpen, setIsOpen] = useState(false);
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+
+  // Example of passing an array
+  const specialDays = [
+    {
+      date: `${year}-${String(month).padStart(2, "0")}-15`,
+      type: "dinner-only" as const,
+      description: "Dinner only",
+    },
+    {
+      date: `${year}-${String(month).padStart(2, "0")}-29`,
+      type: "dinner-only" as const,
+      description: "Dinner only",
+    },
+    {
+      date: `${year}-${String(month).padStart(2, "0")}-08`,
+      type: "closed" as const,
+      description: "Temporary closure",
+    },
+  ];
 
   return (
     <>
@@ -31,18 +55,19 @@ export function CalendarButton({ scrolled }: CalendarDialogProps) {
         className="relative z-50"
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-gray-800/80">
-          <DialogPanel className="max-w-lg space-y-4 border bg-black p-12">
-            <DialogTitle className="font-bold">Deactivate account</DialogTitle>
-            <Description>
-              This will permanently deactivate your account
-            </Description>
-            <p>
-              Are you sure you want to deactivate your account? All of your data
-              will be permanently removed.
-            </p>
-            <div className="flex gap-4">
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
-              <button onClick={() => setIsOpen(false)}>Deactivate</button>
+          <DialogPanel className="space-y-4 bg-black mx-2 p-12 rounded-3xl">
+            <div
+              style={{
+                paddingTop: "100px",
+                paddingBottom: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <h1 className="text-2xl font-bold mb-4">営業日カレンダー</h1>
+              <Calendar year={year} month={month} specialDays={specialDays} />
             </div>
           </DialogPanel>
         </div>

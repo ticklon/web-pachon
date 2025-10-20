@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { MobileHeaderMenu } from "~/components/mobile-header-menu";
 import Logo from "~/img/logo.png";
-import { CalendarButton } from "~/components/CalendarButton";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +34,7 @@ export function Header() {
         </Link>
         <nav>
           <ul className="hidden sm:flex space-x-6">
-            {["Menu", "Concept", "Access", "Chef", "History"].map(
+            {["Menu", "Concept", "Access", "Chef", "History", "Calendar"].map(
               (item) => (
                 <li key={item}>
                   <Link
@@ -51,9 +50,6 @@ export function Header() {
                 </li>
               )
             )}
-            <li key='calendarButton'>
-              <CalendarButton scrolled={scrolled} />
-            </li>
           </ul>
           <div className="block sm:hidden">
             <MobileHeaderMenu />

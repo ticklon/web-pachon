@@ -28,7 +28,7 @@ function Concept() {
 
 function MenuAndChef() {
   return (
-    <section className="py-20 bg-white">
+    <section id="menu" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
@@ -55,7 +55,7 @@ function MenuAndChef() {
 
 function Instagram() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="instagram" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-serif mb-8">INSTAGRAM</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -80,7 +80,7 @@ function Instagram() {
 
 function Access() {
   return (
-    <section className="py-20 bg-white">
+    <section id="access" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-serif mb-8 text-center">
           ACCESS & RESERVATION
