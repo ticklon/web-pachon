@@ -3,6 +3,29 @@ import { useState, useEffect } from "react";
 import { MobileHeaderMenu } from "~/components/mobile-header-menu";
 import Logo from "~/img/logo.png";
 
+const navMenu = [
+  {
+    name: "Menu",
+    url: "/#menu",
+  },
+  {
+    name: "Access",
+    url: "/#access",
+  },
+  {
+    name: "Chef",
+    url: "/#chef",
+  },
+  {
+    name: "History",
+    url: "/#url",
+  },
+  {
+    name: "Calendar",
+    url: "/calendar",
+  },
+]
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,17 +57,17 @@ export function Header() {
         </Link>
         <nav>
           <ul className="hidden sm:flex space-x-6">
-            {["Menu", "Concept", "Access", "Chef", "History", "Calendar"].map(
+            {navMenu.map(
               (item) => (
-                <li key={item}>
+                <li key={item.name}>
                   <Link
-                    to={`/#${item.toLowerCase()}`}
+                    to={`${item.url}`}
                     className={`group relative hover:text-shadow-none text-shadow-lg
             text-shadow-stone-900 px-2 py-1 transition-all duration-300 ${
               scrolled ? "text-gray-600 text-shadow-none" : "text-white"
             }`}
                   >
-                    {item}
+                    {item.name}
                     <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </li>
