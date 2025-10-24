@@ -105,7 +105,7 @@ function Access() {
             <p className="mb-4">
               <strong>定休日:</strong> 火曜日
             </p>
-            <a href="#"
+            <a href="https://res-reserve.com/ja/restaurants/149343-129c694b" target="_blank" rel="noopener noreferrer"
               className="inline-block w-full text-center bg-red-800 text-white px-8 py-4 text-lg font-bold hover:bg-red-700 transition">
               オンライン予約
             </a>
