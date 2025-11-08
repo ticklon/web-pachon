@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { MobileHeaderMenu } from "~/components/mobile-header-menu";
 import Logo from "~/img/logo.png";
+import PachonLogo from "./PachonLogo";
+import PachonIcon from "./PachonIcon";
 
 const navMenu = [
   {
@@ -24,7 +26,7 @@ const navMenu = [
     name: "Calendar",
     url: "/calendar",
   },
-]
+];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -46,33 +48,37 @@ export function Header() {
       <div className="container mx-auto px-4 flex justify-between items-center h-16">
         <Link
           to="/"
-          className={`flex flex-row space-x-5 font-semibold items-center text-xl ${
-            scrolled ? "text-gray-800" : "text-white"
-          }`}
+          className="flex flex-row space-x-5 font-semibold items-center text-xl fill-white text-white"
         >
-          <div className="w-12 sm:w-16">
-            <img src={Logo} alt="" />
+          <div className="w-8 sm:w-12">
+            <PachonIcon />
           </div>
-          <span>PACHON</span>
+          <div className="w-48">
+            <PachonLogo />
+          </div>
         </Link>
         <nav>
           <ul className="hidden sm:flex space-x-6">
-            {navMenu.map(
-              (item) => (
-                <li key={item.name}>
-                  <Link
-                    to={`${item.url}`}
-                    className={`group relative hover:text-shadow-none text-shadow-lg
-            text-shadow-stone-900 px-2 py-1 transition-all duration-300 ${
+            {navMenu.map((item) => (
+              <li key={item.name}>
+                <Link
+                  to={`${item.url}`}
+                  className={`group relative text-shadow-lg
+            text-shadow-stone-900 px-2 py-1 transition-all duration-500 ${
               scrolled ? "text-gray-600 text-shadow-none" : "text-white"
             }`}
-                  >
-                    {item.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </li>
-              )
-            )}
+                >
+                  {item.name}
+                  <span
+                    className={`absolute left-0 bottom-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${
+                      scrolled
+                        ? "bg-gray-600"
+                        : "bg-white"
+                    }`}
+                  ></span>
+                </Link>
+              </li>
+            ))}
           </ul>
           <div className="block sm:hidden">
             <MobileHeaderMenu />
