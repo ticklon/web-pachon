@@ -3,46 +3,53 @@ import React from 'react';
 const PachonIcon = ({
   width = '100%',
   height = 'auto',
-  shadowColor = '#000000', // 影の色のデフォルト値
+  shadowColor = '#000000', 
+  showShadow = true,
   className = '',
   ...rest
 }) => {
   // SVGフィルターで使うユニークなIDを生成
   const filterId = React.useId ? `shadow-filter-${React.useId()}` : 'logo-drop-shadow-3';
   
-  // 影のパラメータ設定
   const SHADOW_OPACITY = 0.8; // 影の透明度
-  const SHADOW_DEVIATION = 12;   // ぼかしの強さ (新しい形状に合わせて少し増やしました)
-  const SHADOW_DX = 16;          // X方向のオフセット
-  const SHADOW_DY = 16;          // Y方向のオフセット
+  const SHADOW_DEVIATION = 12; // ぼかしの強さ (新しい形状に合わせて少し増やしました)
+  const SHADOW_DX = 16; // X方向のオフセット
+  const SHADOW_DY = 16; // Y方向のオフセット
+
+
+  const filterAttribute = showShadow ? `url(#${filterId})` : undefined;
+
+  // 影フィルターの定義はshowShadowがtrueの場合にのみレンダリング
+  const filterDefs = showShadow ? (
+    <defs>
+      <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow 
+          dx={SHADOW_DX}
+          dy={SHADOW_DY}
+          stdDeviation={SHADOW_DEVIATION}
+          floodColor={shadowColor}
+          floodOpacity={SHADOW_OPACITY}
+        />
+      </filter>
+    </defs>
+  ) : null;
 
   return (
     <svg
-      viewBox="0 0 803.57 712.82" // 新しいviewBoxを適用
+      viewBox="0 0 803.57 712.82"
       width={width}
       height={height}
       // fill-currentを適用することで、親要素またはclassNameのtext-*で色を制御
       className={`fill-current ${className}`} 
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      style={{ overflow: 'visible' }} 
+      style={{ overflow: showShadow ? 'visible' : 'hidden' }} // 影がない場合はoverflowをhiddenに戻す
       {...rest}
     >
-      <defs>
-        {/* feDropShadowを使用してドロップシャドウを定義 */}
-        <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow 
-            dx={SHADOW_DX}
-            dy={SHADOW_DY}
-            stdDeviation={SHADOW_DEVIATION}
-            floodColor={shadowColor}
-            floodOpacity={SHADOW_OPACITY}
-          />
-        </filter>
-      </defs>
+      {filterDefs} {/* 影の定義 */}
 
       {/* SVG Path Data: 影フィルターを適用し、fill属性は削除 */}
-      <g filter={`url(#${filterId})`}>
+      <g filter={filterAttribute}>
         <path d="M789.56,690.08v22.74H14.35l.22-26.66c.09-10.39,8.53-18.76,18.92-18.75l728.85.45c27.21,0,27.21,11.18,27.21,22.21Z"/>
         <path d="M776.38,223.78h0c0,8.28-6.71,14.99-14.99,14.99h-339.65c8.47-6.3,19.11-9.68,28.28-15.18,7.1-4.26,13.84-9.47,20.18-14.79h291.2c8.28,0,14.99,6.71,14.99,14.99Z"/>
         <path d="M298.86,60.94v23.98H41.63c-.81,0-6.88-2.43-7.85-3.14-6.15-4.54-4.47-14.2-4.64-20.84h269.72Z"/>
@@ -62,7 +69,7 @@ const PachonIcon = ({
         <path d="M133.88,313.69c-23.96.06-58.23-5.39-62.4,27.38-5.55,72.18-10.39,151.48-5.36,224.83,1.05,16.05,14.55,28.49,30.64,28.48,35.93-.76,73.7,9.38,73.24-41.47,4.45-62.54.23-94.55-2.97-156.82-4.05-28.65,8.95-80.38-33.14-82.41Z"/>
         <path d="M700.68,313.69c-24.54-.25-58.79-4.69-61.7,29.05-4.63,79-11.5,139.26-4.43,223.45,3.35,36.32,46.78,27.1,71.63,27.88,16.23-.07,29.58-12.7,30.67-28.89,2.88-41.87,1.82-83.32,1.61-125.19,0,0-6.98-97.64-6.98-97.64-1.16-16.15-14.6-28.67-30.79-28.67Z"/>
         
-        {/* 以下は新しいSVGに含まれる追加の<g>グループ内のパスです */}
+        {/* 以下は追加の<g>グループ内のパスです */}
         <path d="M414.02,306.62c-77.3,85.39,61.56,188.32,6.76,279.58-6.39,10.56-15.9,19.22-26.61,25.02-6.08,3.9-14.05,5.5-18.07,11.87-.16-6.07,4.71-10.84,8.12-15.32,19.14-19.55,23.7-47.02,19.82-73.4-9.55-59.15-59.55-114.24-38.91-177.74,6.62-22.91,23.75-46.75,48.88-50.01Z"/>
         <path d="M473.63,474.57c36.62-10.52,52.99,42.57,37.47,68.93-7.44,17.67-27.26,26.26-30.72,45.19-5.16,31.84,11.98,31.93,16.29,50.29-1.38-1.76-3.35-2.2-5.35-2.82-12.03-2.81-22.99-7.58-30.72-18.21-9.42-13.14-12.82-30.74-8.96-46.57,4.18-21.3,24.93-31.85,32.06-50.9,3.87-16.1,5.42-35.05-10.07-45.91h0Z"/>
         <path d="M330.5,475.81c-9.59,17.69-5.14,37.91.13,55.95,3,6.71,8.19,11.42,12.45,17.84,20.08,27.23,10.37,76.67-24.07,86.7-4.01,1.47-8.29,1.05-11.55,3.92.04-13.79,12.6-19.38,8.45-40.9.1-19.72-17.59-29.61-24.56-46.58-13.11-28.72,2.21-79.48,39.15-76.93Z"/>

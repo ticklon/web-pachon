@@ -48,12 +48,14 @@ export function Header() {
       <div className="container mx-auto px-4 flex justify-between items-center h-16">
         <Link
           to="/"
-          className="flex flex-row space-x-5 font-semibold items-center text-xl fill-white text-white"
+className={`flex flex-row space-x-5 font-semibold items-center text-xl transition-all duration-700 ${
+        scrolled ? "text-gray-600 fill-gray-600" : "text-white fill-white"
+      }`}
         >
           <div className="w-8 sm:w-12">
-            <PachonIcon />
+            <PachonIcon showShadow={!scrolled} />
           </div>
-          <div className="w-48">
+          <div className="w-24 sm:w-48">
             <PachonLogo />
           </div>
         </Link>
