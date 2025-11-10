@@ -2,7 +2,7 @@ import React from 'react';
 
 const PachonIcon = ({
   width = '100%',
-  height = 'auto',
+  height = '100%',
   shadowColor = '#000000', 
   showShadow = true,
   className = '',
@@ -12,9 +12,9 @@ const PachonIcon = ({
   const filterId = React.useId ? `shadow-filter-${React.useId()}` : 'logo-drop-shadow-3';
   
   const SHADOW_OPACITY = 0.8; // 影の透明度
-  const SHADOW_DEVIATION = 12; // ぼかしの強さ (新しい形状に合わせて少し増やしました)
-  const SHADOW_DX = 16; // X方向のオフセット
-  const SHADOW_DY = 16; // Y方向のオフセット
+  const SHADOW_DEVIATION = 19; // ぼかしの強さ (新しい形状に合わせて少し増やしました)
+  const SHADOW_DX = 19; // X方向のオフセット
+  const SHADOW_DY = 19; // Y方向のオフセット
 
 
   const filterAttribute = showShadow ? `url(#${filterId})` : undefined;

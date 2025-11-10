@@ -2,7 +2,7 @@ import React from 'react';
 
 const PachonLogo = ({
   width = '100%',
-  height = 'auto',
+  height = '100%',
   shadowColor = '#000000', // 影の色のデフォルト値
   showShadow = true,
   className = '',

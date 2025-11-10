@@ -1,0 +1,15 @@
+import { useEffect } from 'react';
+
+export function useScrollLock(open: boolean) {
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add('overflow-y-hidden');
+    } else {
+      document.body.classList.remove('overflow-y-hidden');
+    }
+
+    return () => {
+      document.body.classList.remove('overflow-y-hidden');
+    };
+  }, [open]);
+}

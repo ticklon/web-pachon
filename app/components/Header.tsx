@@ -5,7 +5,7 @@ import Logo from "~/img/logo.png";
 import PachonLogo from "./PachonLogo";
 import PachonIcon from "./PachonIcon";
 
-const navMenu = [
+export const navMenu = [
   {
     name: "Menu",
     url: "/#menu",
