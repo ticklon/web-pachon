@@ -41,22 +41,22 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ease-in-out duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-30 transition-all ease-in-out duration-500 ${
         scrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center h-16">
+      <div className="container mx-auto px-4 flex justify-between items-center h-12 sm:h-16">
         <Link
           to="/"
-className={`flex flex-row space-x-5 font-semibold items-center text-xl transition-all duration-700 ${
-        scrolled ? "text-gray-600 fill-gray-600" : "text-white fill-white"
-      }`}
+          className={`flex flex-row space-x-2 sm:space-x-4 items-center transition-all duration-1000 ${
+            scrolled ? "text-gray-600 fill-gray-600" : "text-white fill-white"
+          }`}
         >
           <div className="w-8 sm:w-12">
             <PachonIcon showShadow={!scrolled} />
           </div>
-          <div className="w-24 sm:w-48">
-            <PachonLogo />
+          <div className="w-24 sm:w-40">
+            <PachonLogo showShadow={!scrolled} />
           </div>
         </Link>
         <nav>
@@ -65,17 +65,15 @@ className={`flex flex-row space-x-5 font-semibold items-center text-xl transitio
               <li key={item.name}>
                 <Link
                   to={`${item.url}`}
-                  className={`group relative text-shadow-lg
-            text-shadow-stone-900 px-2 py-1 transition-all duration-500 ${
+                  className={`group relative text-shadow-lg text-shadow-stone-900 px-2 py-1
+            transition-all duration-500 ${
               scrolled ? "text-gray-600 text-shadow-none" : "text-white"
             }`}
                 >
                   {item.name}
                   <span
                     className={`absolute left-0 bottom-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${
-                      scrolled
-                        ? "bg-gray-600"
-                        : "bg-white"
+                      scrolled ? "bg-gray-600" : "bg-white"
                     }`}
                   ></span>
                 </Link>
