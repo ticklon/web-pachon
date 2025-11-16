@@ -9,7 +9,7 @@ import { Link } from "react-router";
 import { useScrollLock } from "~/hook/useScrollLock";
 import { navMenu } from "~/components/Header";
 
-const PopoverScrollLocker = ({ open }) => {
+const PopoverScrollLocker = ({ open }: {open: boolean}) => {
   useScrollLock(open);
   return null; // このコンポーネントは見た目のレンダリングは不要
 };
