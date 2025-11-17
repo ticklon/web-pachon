@@ -96,7 +96,7 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className="font-sans w-[400px] bg-white rounded-lg shadow-lg p-6 text-gray-800">
+    <div className="font-sans w-screen sm:w-[400px] mx-2.5 bg-white rounded-lg shadow-lg p-6 text-gray-800">
       <div className="text-center mb-5">
         <h2 className="text-xl font-normal m-0 text-gray-900">{`${year}年 ${month}月`}</h2>
       </div>
