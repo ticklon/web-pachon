@@ -22,12 +22,9 @@ export function CalendarButton({ scrolled }: CalendarDialogProps) {
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
-        <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-gray-800/80">
-          <DialogPanel className="space-y-4 bg-black mx-2 p-12 rounded-3xl">
-            <div style={{
-              paddingTop: "100px", paddingBottom: "40px", display: "flex", justifyContent: "center",
-              alignItems: "center", flexDirection: "column",
-            }}>
+        <div className="fixed inset-0 flex w-screen items-center justify-center bg-gray-800/80">
+          <DialogPanel className="space-y-4 bg-black mx-0.5 p-3 md:p-12 max-h-[85vh] overflow-y-auto">
+            <div className="flex flex-col justify-center items-center pt-6 pb-4">
               <h1 className="text-2xl font-bold mb-4">営業日カレンダー</h1>
               <div className="flex md:flex-row flex-col justify-center space-y-4 md:space-y-0 space-x-4 overflow-auto">
                 <Calendar year={calendarConfig.year} month={calendarConfig.month} specialDays={calendarConfig.specialDays} />
