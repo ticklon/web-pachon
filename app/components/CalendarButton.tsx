@@ -1,11 +1,7 @@
-import {
-  Description,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import { useState } from "react";
 import Calendar from "~/components/Calendar";
+import { calendarConfig, calendarConfig2 } from "~/config/calendar";
 
 interface CalendarDialogProps {
   scrolled: boolean;
@@ -14,60 +10,29 @@ interface CalendarDialogProps {
 export function CalendarButton({ scrolled }: CalendarDialogProps) {
   let [isOpen, setIsOpen] = useState(false);
 
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-
-  // Example of passing an array
-  const specialDays = [
-    {
-      date: `${year}-${String(month).padStart(2, "0")}-15`,
-      type: "dinner-only" as const,
-      description: "Dinner only",
-    },
-    {
-      date: `${year}-${String(month).padStart(2, "0")}-29`,
-      type: "dinner-only" as const,
-      description: "Dinner only",
-    },
-    {
-      date: `${year}-${String(month).padStart(2, "0")}-08`,
-      type: "closed" as const,
-      description: "Temporary closure",
-    },
-  ];
-
   return (
     <>
-      <div
-        className={`inline group relative hover:text-shadow-none text-shadow-lg text-shadow-stone-900 px-2 py-1
-    transition-all duration-300 ${
-      scrolled ? "text-gray-600 text-shadow-none" : "text-white"
-    }`}
-        onClick={() => setIsOpen(true)}
+      <div className={`group relative inline cursor-pointer text-shadow-lg text-shadow-stone-900 px-2 py-1 transition-all
+    duration-500 ${scrolled ? "text-gray-600 text-shadow-none" : "text-white"}`} onClick={() => setIsOpen(true)}
       >
         Calendar
-        <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+        <span className={`absolute left-0 bottom-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${scrolled
+          ? "bg-gray-600" : "bg-white"}`}></span>
       </div>
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-gray-800/80">
           <DialogPanel className="space-y-4 bg-black mx-2 p-12 rounded-3xl">
-            <div
-              style={{
-                paddingTop: "100px",
-                paddingBottom: "40px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
+            <div style={{
+              paddingTop: "100px", paddingBottom: "40px", display: "flex", justifyContent: "center",
+              alignItems: "center", flexDirection: "column",
+            }}>
               <h1 className="text-2xl font-bold mb-4">営業日カレンダー</h1>
-              <Calendar year={year} month={month} specialDays={specialDays} />
+              <div className="flex md:flex-row flex-col justify-center space-y-4 md:space-y-0 space-x-4 overflow-auto">
+                <Calendar year={calendarConfig.year} month={calendarConfig.month} specialDays={calendarConfig.specialDays} />
+                <Calendar year={calendarConfig2.year} month={calendarConfig2.month} specialDays={calendarConfig2.specialDays} />
+              </div>
             </div>
           </DialogPanel>
         </div>
