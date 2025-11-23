@@ -109,9 +109,6 @@ const Calendar: React.FC<CalendarProps> = ({
         <div className="text-center text-sm font-light text-gray-400">Thu</div>
         <div className="text-center text-sm font-light text-gray-400">Fri</div>
         <div className="text-center text-sm font-light text-blue-400">Sat</div>
-        {/* ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => ( */}
-        {/* <div key={day} className="text-center text-sm font-light text-gray-400">{day}</div> */}
-        {/* ))} */}
       </div>
       <div className="grid grid-cols-7 gap-2">{renderDays()}</div>
       <div className="mt-5 pt-4 border-t border-gray-100 text-sm text-gray-500">

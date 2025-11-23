@@ -8,13 +8,15 @@ import { Menu, X } from "lucide-react";
 import { Link } from "react-router";
 import { useScrollLock } from "~/hook/useScrollLock";
 import { navMenu } from "~/components/Header";
+import { useCalendar } from "~/context/CalendarContext";
 
-const PopoverScrollLocker = ({ open }: {open: boolean}) => {
+const PopoverScrollLocker = ({ open }: { open: boolean }) => {
   useScrollLock(open);
   return null; // このコンポーネントは見た目のレンダリングは不要
 };
 
 export const MobileHeaderMenu = () => {
+  const { openCalendar } = useCalendar();
   return (
     <Popover className="relative group">
       {({ open }) => (
@@ -39,12 +41,17 @@ export const MobileHeaderMenu = () => {
                 data-closed:-translate-y-8 data-closed:opacity-0 text-lg font-semibold"
           >
             {navMenu.map((item) => (
-              <div key={item.name} className="w-full text-dream-skyblue px-2 pt-4 border-t border-t-blue-200/25">
+              <div key={item.name} className="w-full text-dream-skyblue px-12 pt-4 border-t border-t-blue-200/25">
                 <CloseButton as={Link} to={`${item.url}`}>
                   {item.name}
                 </CloseButton>
               </div>
             ))}
+            <div className="w-full text-dream-skyblue px-12 pt-4 border-t border-t-blue-200/25">
+              <CloseButton as="button" onClick={openCalendar}>
+                Calendar
+              </CloseButton>
+            </div>
           </PopoverPanel>
         </>
       )}

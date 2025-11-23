@@ -45,8 +45,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { CalendarProvider } from "~/context/CalendarContext";
+import { CalendarModal } from "~/components/CalendarModal";
+
 export default function App() {
-  return <Outlet />;
+  return (
+    <CalendarProvider>
+      <Outlet />
+      <CalendarModal />
+    </CalendarProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
