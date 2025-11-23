@@ -34,29 +34,24 @@ export const calendarConfig2 = {
     month: 1,
     specialDays: [
         {
-            date: "2026-01-03",
-            type: "dinner-only" as const,
-            description: "Dinner only",
-        },
-        {
-            date: "2026-01-10",
-            type: "dinner-only" as const,
-            description: "Dinner only",
-        },
-        {
-            date: "2026-01-17",
+            date: "2026-01-01",
             type: "closed" as const,
             description: "Closed",
         },
         {
-            date: "2026-01-23",
-            type: "open" as const,
-            description: "Open",
+            date: "2026-01-05",
+            type: "closed" as const,
+            description: "Closed",
         },
         {
-            date: "2026-01-30",
-            type: "open" as const,
-            description: "Open",
+            date: "2026-01-07",
+            type: "closed" as const,
+            description: "Closed",
+        },
+        {
+            date: "2026-01-08",
+            type: "dinner-only" as const,
+            description: "Dinner only",
         },
     ],
 };
