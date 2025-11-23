@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 const images = [
-  "cassoulet.jpg", 
-  "/Pachon_inside-1.jpg", 
-  "/DSC_0005.jpg", 
-  "/DSC_0013.jpg",
-  "/DSC_0364.jpg",
-  "/DSC_0041.jpg",
-  "/DSC_0343.jpg",
-  "/DSC_0350.jpg",
-  "/DSC_0039.jpg",
-  "/DSC_0358.jpg",
-  "/_MG_4824.jpg",
+  "cassoulet.webp", 
+  "/Pachon_inside-1.webp", 
+  "/DSC_0005.webp", 
+  "/DSC_0013.webp",
+  "/DSC_0364.webp",
+  "/DSC_0041.webp",
+  "/DSC_0343.webp",
+  "/DSC_0350.webp",
+  "/DSC_0039.webp",
+  "/DSC_0358.webp",
+  "/_MG_4824.webp",
 ];
 
 const SLIDE_INTERVAL = 7000;

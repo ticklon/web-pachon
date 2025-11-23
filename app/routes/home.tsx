@@ -32,7 +32,7 @@ function MenuAndChef() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
-            <img src="/cassoulet.jpg" alt="Cassolette dish" className="w-full h-full object-cover shadow-lg" />
+            <img src="/cassoulet.webp" alt="Cassolette dish" className="w-full h-full object-cover shadow-lg" />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-serif mb-4">MENU & CHEF</h2>
