@@ -12,16 +12,16 @@ export const navMenu = [
     url: "/#menu",
   },
   {
-    name: "Access",
-    url: "/#access",
-  },
-  {
     name: "Chef",
     url: "/#chef",
   },
   {
     name: "History",
-    url: "/#url",
+    url: "/#history",
+  },
+  {
+    name: "Access",
+    url: "/#access",
   },
 ];
 
