@@ -14,7 +14,7 @@ export default function Chef() {
     return (
         <div className="antialiased text-gray-800">
             <Header />
-            <main className="pt-20">
+            <main className="pt-12 sm:pt-16">
                 <section className="py-20 bg-gray-50">
                     <div className="container mx-auto px-4">
                         <h1 className="text-4xl font-serif mb-12 text-center">CHEF</h1>
@@ -27,10 +27,11 @@ export default function Chef() {
                                 <h3 className="text-3xl font-serif mb-6">アンドレ・パッション</h3>
                                 <p className="text-gray-600 mb-6 leading-relaxed">
                                     1944年、南フランスのモンペリエに生まれ、城塞都市カルカッソンヌで育ちました。
+                  <br /><br />
                                     16歳で「カスレの王様」と名高いマルセル・エメリック氏に師事し、料理人としての道を歩み始めます。
                                 </p>
                                 <p className="text-gray-600 mb-6 leading-relaxed">
-                                    1970年の大阪万国博覧会を機に来日。
+                                    1970年の大阪万国博覧会を機に来日。<br />
                                     運命的な出会いを経て日本に留まり、名店でシェフを務めた後、1984年に代官山で「レストラン パッション」を開店しました。
                                 </p>
                                 <p className="text-gray-600 leading-relaxed">
