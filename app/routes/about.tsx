@@ -15,7 +15,7 @@ export default function About() {
   return (
     <div className="antialiased text-gray-800">
       <Header />
-      <main className="pt-20">
+      <main className="pt-12 sm:pt-16">
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl font-serif mb-12 text-center">ABOUT US</h1>

@@ -8,7 +8,7 @@ export function CalendarModal() {
     const { isOpen, closeCalendar } = useCalendar();
 
     return (
-        <Dialog open={isOpen} onClose={closeCalendar} className="relative z-50">
+        <Dialog open={isOpen} onClose={closeCalendar} transition className="relative z-50 transition duration-300 ease-out data-closed:opacity-0">
             <div className="fixed inset-0 flex w-screen items-center justify-center bg-gray-800/80">
                 <DialogPanel className="relative space-y-4 bg-black mx-0.5 p-3 md:p-12 max-h-[85vh] overflow-x-visible overflow-y-auto">
                     <div

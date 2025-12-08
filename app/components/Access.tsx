@@ -16,7 +16,7 @@ export function Access() {
                     </div>
                     <div className="md:w-1/2 text-center md:text-left">
                         <p className="mb-2">
-                            <strong>住所:</strong> 東京都渋谷区猿楽町29-18 ヒルサイドテラス
+                            <strong>住所:</strong> 東京都渋谷区猿楽町29-18 <br />ヒルサイドテラスB棟1号
                         </p>
                         <p className="mb-2">
                             <strong>電話番号:</strong> 03-3476-5025

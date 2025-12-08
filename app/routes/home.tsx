@@ -20,7 +20,10 @@ function Concept() {
           <br />
           素材が持つ本来の味わいを最大限に引き出し、最高の状態で「熱々」のままお客様の元へお届けします。
         </p>
-        <Link to="/concept" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition">
+        <Link
+          to="/concept"
+          className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+        >
           コンセプトページへ
         </Link>
       </div>
@@ -33,7 +36,11 @@ function History() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row-reverse items-center gap-12">
           <div className="md:w-1/2">
-            <img src="/Pachon_inside-1.webp" alt="Restaurant Interior with Fireplace" className="w-full h-full object-cover shadow-lg" />
+            <img
+              src="/Pachon_inside-1.webp"
+              alt="Restaurant Interior with Fireplace"
+              className="w-full h-full object-cover shadow-lg"
+            />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-serif mb-4">HISTORY & ATMOSPHERE</h2>
@@ -41,13 +48,34 @@ function History() {
               1984年の創業以来、変わることなくフランスの食文化を灯し続けてまいりました。
             </p>
             <p className="text-gray-600 mb-4">
-              私たちのレストランの主役は、17世紀フランスの修道院から受け継いだ本物の暖炉。<br className="sm:hidden" /><br className="sm:hidden" />
-              パチパチと薪がはぜる音、<br className="sm:hidden" />そして香ばしい匂いが、<br className="sm:hidden" />お客様を南フランスの邸宅へとお招きします。<br className="sm:hidden" />
+              私たちのレストランの主役は、17世紀フランスの修道院から受け継いだ本物の暖炉。
+              <br className="sm:hidden" />
+              <br className="sm:hidden" />
+              パチパチと薪がはぜる音、
+              <br className="sm:hidden" />
+              そして香ばしい匂いが、
+              <br className="sm:hidden" />
+              お客様を南フランスの邸宅へとお招きします。
+              <br className="sm:hidden" />
             </p>
-            <p className="text-gray-600">
-              ここは、ただお食事を召し上がっていただく場所ではありません。<br className="sm:hidden" /><br className="sm:hidden" />
-              暖炉の火のように温かな<br className="sm:hidden" />フランスの郷土料理を通して、<br className="sm:hidden" />心満たされる豊かなひとときを<br className="sm:hidden" />お過ごしいただくための空間です。
+            <p className="text-gray-600 mb-8">
+              ここは、ただお食事を召し上がっていただく場所ではありません。
+              <br className="sm:hidden" />
+              <br className="sm:hidden" />
+              暖炉の火のように温かな
+              <br className="sm:hidden" />
+              フランスの郷土料理を通して、
+              <br className="sm:hidden" />
+              心満たされる豊かなひとときを
+              <br className="sm:hidden" />
+              お過ごしいただくための空間です。
             </p>
+            <Link
+              to="/about"
+              className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+            >
+              パッションについて
+            </Link>
           </div>
         </div>
       </div>
@@ -61,7 +89,11 @@ function MenuAndChef() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
-            <img src="/cassoulet.webp" alt="Cassolette dish" className="w-full h-full object-cover shadow-lg" />
+            <img
+              src="/cassoulet.webp"
+              alt="Cassolette dish"
+              className="w-full h-full object-cover shadow-lg"
+            />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-serif mb-4">MENU & CHEF</h2>
@@ -69,47 +101,26 @@ function MenuAndChef() {
               シェフの故郷の味であり、生涯を捧げるスペシャリテ「カスレ」。
               厳選された食材と、伝統のレシピが織りなす情熱の煮込み料理をご堪能ください。
             </p>
-            <Link to="/menu" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition mr-4">
-              メニュー詳細へ
-            </Link>
-            <Link to="/chef" className="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition">
-              シェフについて
-            </Link>
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <Link
+                to="/menu"
+                className="bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+              >
+                メニュー詳細へ
+              </Link>
+              <Link
+                to="/chef"
+                className="bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition"
+              >
+                シェフについて
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-function Instagram() {
-  return (
-    <section id="instagram" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-serif mb-8">INSTAGRAM</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {/* Placeholder for Instagram feed */}
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="relative group aspect-square">
-              <img src={`https://source.unsplash.com/random/600x600/?food,${i}`} alt={`Instagram post ${i + 1}`}
-                className="w-full h-full object-cover" />
-              <div
-                className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition flex items-center justify-center">
-                <p className="text-white opacity-0 group-hover:opacity-100 transition">
-                  View on Instagram
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-
-
 
 // The loader can be used in the future to fetch dynamic data, for example, for the News section.
 export function loader({ context }: Route.LoaderArgs) {
@@ -126,7 +137,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <News />
       <History />
       <MenuAndChef />
-      <Instagram />
       <Access />
       <FloatingCTA />
     </div>
